@@ -18,7 +18,6 @@ local utils = require("telescope.utils")
 local sorters = require("telescope.sorters")
 local make_entry = require("telescope.make_entry")
 local api = vim.api
-local home_dir = os.getenv("HOME")
 
 
 -- vim.api.nvim_set_keymap("n", "<C-s><C-a>", function ()
@@ -38,7 +37,7 @@ return require("telescope").register_extension {
         show_hotproject = function(opts)
             opts = opts or {}
             opts.cwd = opts.cwd or vim.fn.getcwd()
-
+            local home_dir = os.getenv("HOME")
             local command = {"cat", home_dir .. "/.config/local/hotstation"}
 
             local seen = {};
