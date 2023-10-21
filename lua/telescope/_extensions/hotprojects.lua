@@ -51,11 +51,12 @@ return require("telescope").register_extension {
             end
             actions.close(prompt_bufnr)
 
-            local hotprojects = {"",""}
+            local hotprojects = {}
             for _, c in ipairs(selections) do
               table.insert(hotprojects, c[1])
             end
-            api.nvim_put(hotprojects, "l", true, false)
+            -- api.nvim_put(hotprojects, "l", true, false)
+            vim.cmd("e " .. selections[1])
           end
 
           map('i', '<CR>', insert_hotproject)
