@@ -21,16 +21,16 @@ local api = vim.api
 local home_dir = vim.env.HOME
 
 
-vim.api.nvim_set_keymap("n", "<C-s><C-a>", function ()
-    local f = io.open(home_dir .. "/.config/local/hotstation", "r")
-    local cwd = vim.fn.getcwd()
-    -- if f == nill then
-    --     print("failed")
-    -- else
-    f:write(cwd)
-    f:close()
-    -- end
-end, {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap("n", "<C-s><C-a>", function ()
+--     local f = io.open(home_dir .. "/.config/local/hotstation", "r")
+--     local cwd = vim.fn.getcwd()
+--     -- if f == nill then
+--     --     print("failed")
+--     -- else
+--     f:write(cwd)
+--     f:close()
+--     -- end
+-- end, {noremap = true, silent = true})
 
 
 return require("telescope").register_extension {
@@ -58,20 +58,20 @@ return require("telescope").register_extension {
                 sorter = sorters.get_generic_fuzzy_sorter(),
                 attach_mappings = function(prompt_bufnr, map)
                     local list_hotproject = function()
-                    local picker = action_state.get_current_picker(prompt_bufnr)
-                    local selections = picker:get_multi_selection()
-                    if next(selections) == nil then
-                        selections = {picker:get_selection()}
-                    end
-                    actions.close(prompt_bufnr)
+                        local picker = action_state.get_current_picker(prompt_bufnr)
+                        local selections = picker:get_multi_selection()
+                        if next(selections) == nil then
+                            selections = {picker:get_selection()}
+                        end
+                        actions.close(prompt_bufnr)
 
-                    local hotprojects = {}
-                    for _, c in ipairs(selections) do
-                        table.insert(hotprojects, c[1])
+                        local hotprojects = {}
+                        for _, c in ipairs(selections) do
+                            table.insert(hotprojects, c[1])
+                        end
+                        -- api.nvim_put(hotprojects, "l", true, false)
+                        vim.cmd("e " .. hotprojects[1])
                     end
-                    -- api.nvim_put(hotprojects, "l", true, false)
-                    vim.cmd("e " .. hotprojects[1])
-                end
 
                 map('i', '<CR>', list_hotproject)
                 map('n', '<CR>', list_hotproject)
