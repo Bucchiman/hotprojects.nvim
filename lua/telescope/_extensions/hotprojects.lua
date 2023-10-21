@@ -21,7 +21,7 @@ local api = vim.api
 
 return require("telescope").register_extension {
   exports = {
-    coauthors = function(opts)
+    hotproject = function(opts)
       opts = opts or {}
       opts.cwd = opts.cwd or vim.fn.getcwd()
 
