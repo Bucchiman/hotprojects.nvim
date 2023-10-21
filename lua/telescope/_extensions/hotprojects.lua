@@ -18,6 +18,7 @@ local utils = require("telescope.utils")
 local sorters = require("telescope.sorters")
 local make_entry = require("telescope.make_entry")
 local api = vim.api
+local home_dir = vim.env.HOME
 
 return require("telescope").register_extension {
   exports = {
@@ -25,7 +26,7 @@ return require("telescope").register_extension {
       opts = opts or {}
       opts.cwd = opts.cwd or vim.fn.getcwd()
 
-      local command = {"cat", "/home/bucchiman/.config/local/hotstation"}
+      local command = {"cat", home_dir .. "/.config/local/hotstation"}
 
       local seen = {};
       local string_entry_maker = make_entry.gen_from_string()
