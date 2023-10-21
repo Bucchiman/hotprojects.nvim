@@ -25,7 +25,7 @@ return require("telescope").register_extension {
       opts = opts or {}
       opts.cwd = opts.cwd or vim.fn.getcwd()
 
-      local command = {"ls", "-1"}
+      local command = {"cat", "$HOME/.config/local/hotstation"}
 
       local seen = {};
       local string_entry_maker = make_entry.gen_from_string()
