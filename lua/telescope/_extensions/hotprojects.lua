@@ -20,26 +20,14 @@ local make_entry = require("telescope.make_entry")
 local api = vim.api
 
 
--- vim.api.nvim_set_keymap("n", "<C-s><C-a>", function ()
---     local f = io.open(home_dir .. "/.config/local/hotstation", "r")
---     local cwd = vim.fn.getcwd()
---     -- if f == nill then
---     --     print("failed")
---     -- else
---     f:write(cwd)
---     f:close()
---     -- end
--- end, {noremap = true, silent = true})
-
-
 return require("telescope").register_extension {
     exports = {
         show_hotproject = function(opts)
             opts = opts or {}
             opts.cwd = opts.cwd or vim.fn.getcwd()
             local home_dir = os.getenv("HOME")
-            local command = {"cat ", home_dir, "/.config/local/hotstation"}
-            -- local command = {"cat ", "/Users/8ucchiman/.config/local/hotstation"}
+            local command = {"cat", home_dir .. "/.config/local/hotstation"}
+            -- local command = {"cat", "/Users/8ucchiman/.config/local/hotstation"}
 
             local seen = {};
             local string_entry_maker = make_entry.gen_from_string()
@@ -69,7 +57,6 @@ return require("telescope").register_extension {
                         for _, c in ipairs(selections) do
                             table.insert(hotprojects, c[1])
                         end
-                        print(hotprojects[1])
                         -- api.nvim_put(hotprojects, "l", true, false)
                         vim.cmd("e " .. hotprojects[1])
                     end
