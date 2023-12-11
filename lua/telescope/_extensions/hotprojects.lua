@@ -4,7 +4,7 @@
 -- Author:       8ucchiman
 -- Email:        8ucchiman@gmail.com
 -- CreatedDate:  2023-10-21 14:14:38
--- LastModified: 2023-01-23 14:18:33 +0900
+-- LastModified: 2023-12-12 00:34:02
 -- Reference:    https://stackoverflow.com/questions/73358168/where-can-i-check-my-neovim-lua-runtimepath
 -- Description:  ---
 --
@@ -26,6 +26,9 @@ return require("telescope").register_extension {
             opts = opts or {}
             opts.cwd = opts.cwd or vim.fn.getcwd()
             local home_dir = os.getenv("HOME")
+            if home_dir == nil then
+                home_dir = os.getenv("UserProfile")
+            end
             local hotstation_paty = home_dir .. "/.config/local/hotstation"
             local command = {"cat", hotstation_paty}
             -- local command = {"cat", "/Users/8ucchiman/.config/local/hotstation"}
